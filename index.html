@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uknow School - Онлайн школа английского языка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(255, 107, 157, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc2d1 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #ff6b9d;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ff6b9d;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d, #ffc2d1);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Teachers Section */
+        .teachers {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.1);
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .teacher-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.15);
+            transition: all 0.3s;
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #ffeef2;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.25);
+            border-color: #ff6b9d;
+        }
+
+        .teacher-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d, #ffc2d1);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .teacher-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .teacher-card h3 {
+            color: #ff6b9d;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-card .position {
+            color: #ff8fab;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .teacher-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Features Section (Extra) */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            border-color: #ff6b9d;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+        }
+
+        /* Registration Section */
+        .registration {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ff6b9d;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ffc2d1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Payment Section */
+        .payment {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .payment-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #ffc2d1;
+            transition: all 0.3s;
+        }
+
+        .payment-card:hover {
+            border-color: #ff6b9d;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.2);
+        }
+
+        .payment-card h3 {
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-card input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ffc2d1;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .payment-card input:focus {
+            outline: none;
+            border-color: #ff6b9d;
+        }
+
+        .pay-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .pay-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .registration, .payment, .teachers {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                📚 Uknow School
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#teachers">Преподаватели</a></li>
+                <li><a href="#features">Преимущества</a></li>
+                <li><a href="#registration">Записаться</a></li>
+                <li><a href="#payment">Оплата</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Uknow School</h1>
+        <p>Изучайте английский язык с профессионалами онлайн!<br>Индивидуальный подход и современные методики</p>
+        <a href="#registration" class="cta-button">Начать обучение</a>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers">
+        <h2 class="section-title">Наши преподаватели</h2>
+        <div class="teachers">
+            <div class="teachers-grid">
+                <!-- Teacher 1: Арина -->
+                <div class="teacher-card">
+                    <div class="teacher-image">
+                        <!-- Замените строку ниже на <img src="arina.jpg" alt="Арина"> -->
+                        👩‍🏫
+                    </div>
+                    <h3>Арина</h3>
+                    <div class="position">Преподаватель английского</div>
+                    <p>Специализация: английский для детей и подростков. Уроки в игровой форме, помощь с домашними заданиями.</p>
+                </div>
+
+                <!-- Teacher 2: Александра -->
+                <div class="teacher-card">
+                    <div class="teacher-image">
+                        <!-- Замените строку ниже на <img src="alexandra.jpg" alt="Александра"> -->
+                        👩‍💼
+                    </div>
+                    <h3>Александра</h3>
+                    <div class="position">Преподаватель английского</div>
+                    <p>Сертифицированный преподаватель. Специализация: бизнес-английский, подготовка к собеседованиям и IELTS.</p>
+                </div>
+
+                <!-- Teacher 3: Хавва -->
+                <div class="teacher-card">
+                    <div class="teacher-image">
+                        <!-- Замените строку ниже на <img src="khavva.jpg" alt="Хавва"> -->
+                        👩‍🎓
+                    </div>
+                    <h3>Хавва</h3>
+                    <div class="position">Преподаватель английского</div>
+                    <p>Специализация: грамматика и письменная речь. Поможет разобраться в сложных временах и правилах.</p>
+                </div>
+
+                <!-- Teacher 4: Настя -->
+                <div class="teacher-card">
+                    <div class="teacher-image">
+                        <!-- Замените строку ниже на <img src="nastya.jpg" alt="Настя"> -->
+                        👩‍🦰
+                    </div>
+                    <h3>Настя</h3>
+                    <div class="position">Преподаватель английского</div>
+                    <p>Специализация: разговорный клуб и снятие языкового барьера. Уроки в формате дружеской беседы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (Extra) -->
+    <section id="features">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Гибкий график</h3>
+                <p>Занимайтесь в удобное время, даже рано утром или поздно вечером</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Онлайн формат</h3>
+                <p>Учитесь из любой точки мира, нужен только интернет</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Индивидуально</h3>
+                <p>Программа подстраивается под ваши цели и уровень</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Отслеживание прогресса</h3>
+                <p>Регулярные тесты и отчеты о вашем прогрессе</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Разговорная практика</h3>
+                <p>Много общения на английском с первого урока</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <h3>Бонусы</h3>
+                <p>Дополнительные материалы и разговорные клубы бесплатно</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration">
+        <h2 class="section-title">Записаться на занятия</h2>
+        <div class="registration">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                </div>
+                
+                <div class="form-group">
+                    <label for="level">Ваш уровень английского</label>
+                    <select id="level" name="level">
+                        <option value="beginner">Начинающий (Beginner)</option>
+                        <option value="elementary">Элементарный (Elementary)</option>
+                        <option value="pre-intermediate">Ниже среднего (Pre-Intermediate)</option>
+                        <option value="intermediate">Средний (Intermediate)</option>
+                        <option value="upper-intermediate">Выше среднего (Upper-Intermediate)</option>
+                        <option value="advanced">Продвинутый (Advanced)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="teacher">Выберите преподавателя</label>
+                    <select id="teacher" name="teacher">
+                        <option value="arina">Арина</option>
+                        <option value="alexandra">Александра</option>
+                        <option value="khavva">Хавва</option>
+                        <option value="nastya">Настя</option>
+                        <option value="any">Любой свободный</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Комментарий</label>
+                    <input type="text" id="message" name="message" placeholder="Ваши пожелания или вопросы">
+                </div>
+                
+                <button type="submit" class="submit-btn">Записаться на пробный урок</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment">
+        <h2 class="section-title">Оплата занятий</h2>
+        <div class="payment">
+            <div class="payment-methods">
+                <!-- Phone Payment -->
+                <div class="payment-card">
+                    <h3>📱 Оплата по телефону</h3>
+                    <p style="margin-bottom: 1rem; color: #666;">Оплатите занятия через мобильный телефон</p>
+                    <input type="tel" placeholder="+7 (___) ___-__-__" id="paymentPhone">
+                    <input type="text" placeholder="Сумма оплаты (₽)" id="phoneAmount">
+                    <button class="pay-button" onclick="payByPhone()">Оплатить</button>
+                </div>
+
+                <!-- Card Payment -->
+                <div class="payment-card">
+                    <h3>💳 Оплата картой</h3>
+                    <p style="margin-bottom: 1rem; color: #666;">Быстрая оплата банковской картой</p>
+                    <input type="text" placeholder="Номер карты" maxlength="19" id="cardNumber">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" placeholder="MM/YY" maxlength="5" id="cardExpiry">
+                        <input type="text" placeholder="CVC" maxlength="3" id="cardCvc">
+                    </div>
+                    <input type="text" placeholder="Имя держателя карты" id="cardHolder">
+                    <input type="text" placeholder="Сумма оплаты (₽)" id="cardAmount">
+                    <button class="pay-button" onclick="payByCard()">Оплатить картой</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center; padding: 1.5rem; background: #fff5f7; border-radius: 10px;">
+                <p style="color: #666; margin-bottom: 0.5rem;">🔒 Безопасная оплата</p>
+                <p style="font-size: 0.9rem; color: #999;">Все платежи защищены SSL-шифрованием</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Uknow School. Все права защищены.</p>
+        <p style="margin-top: 0.5rem;">📧 info@uknowschool.ru | 📱 +7 (999) 123-45-67</p>
+        <div class="social-links">
+            <a href="#">📘</a>
+            <a href="#">📸</a>
+            <a href="#">✈️</a>
+            <a href="#">💬</a>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const teacherName = document.getElementById('teacher').options[document.getElementById('teacher').selectedIndex].text;
+            alert(`Спасибо за регистрацию, ${document.getElementById('name').value}! Вы выбрали преподавателя: ${teacherName}. Мы свяжемся с вами в ближайшее время.`);
+            this.reset();
+        });
+
+        // Payment functions
+        function payByPhone() {
+            const phone = document.getElementById('paymentPhone').value;
+            const amount = document.getElementById('phoneAmount').value;
+            
+            if (!phone || !amount) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            alert(`Запрос на оплату ${amount}₽ отправлен на номер ${phone}. Подтвердите оплату в SMS.`);
+        }
+
+        function payByCard() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const amount = document.getElementById('cardAmount').value;
+            
+            if (!cardNumber || !amount) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            alert(`Оплата ${amount}₽ успешно проведена! Чек отправлен на вашу почту.`);
+        }
+
+        // Phone mask
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value[0] === '7' || value[0] === '8') {
+                    value = value.substring(1);
+                }
+                let formattedValue = '+7';
+                if (value.length > 0) formattedValue += ' (' + value.substring(0, 3);
+                if (value.length >= 3) formattedValue += ') ' + value.substring(3, 6);
+                if (value.length >= 6) formattedValue += '-' + value.substring(6, 8);
+                if (value.length >= 8) formattedValue += '-' + value.substring(8, 10);
+                e.target.value = formattedValue;
+            }
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
